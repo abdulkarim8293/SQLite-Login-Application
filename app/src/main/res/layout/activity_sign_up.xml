@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:padding="10dp"
-    tools:context=".SignUpActivity">
+    tools:context=".activity.SignUpActivity">
 
     <LinearLayout
         android:layout_centerInParent="true"
@@ -32,7 +32,7 @@
             android:padding="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userNameId"
+                android:id="@+id/edtUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="FULL NAME"
@@ -50,7 +50,7 @@
             android:padding="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userEmailId"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="EMAIL"
@@ -67,7 +67,7 @@
             android:padding="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPasswordId"
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="PASSWORD"
@@ -78,6 +78,7 @@
                 android:imeOptions="actionDone"
                 android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUserRetypePass"
             android:layout_width="match_parent"
@@ -85,7 +86,7 @@
             android:padding="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userConfirmPasswordId"
+                android:id="@+id/edtConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="CONFIRM PASSWORD"
@@ -105,7 +106,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/signUpButtonId"
+                android:id="@+id/btnSignUp"
                 android:layout_margin="8dp"
                 android:padding="20dp"
                 android:layout_width="match_parent"
