@@ -34,29 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-
-                    ContentValues contentValues = new ContentValues();
-
-                    contentValues.put(DatabaseHelper.USER_NAME, edtUserName.getText().toString());
-                    contentValues.put(DatabaseHelper.USER_EMAIL, edtEmail.getText().toString());
-                    contentValues.put(DatabaseHelper.USER_PASSWORD, edtPassword.getText().toString());
-
-                    database = DatabaseManager.getInstance().openDatabase();
-                    long checked = database.insert(DatabaseHelper.TABLE_USER, null, contentValues);
-
-                    if (checked != -1) {
-                        message("Account Created" + checked);
-                        //startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
-                    } else {
-                        message("This user is already exists" + checked);
-                    }
-
-                    DatabaseManager.getInstance().closeDatabase();
-
-                } catch (Exception e) {
-                    Toast.makeText(SignUpActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
             }
         });
 

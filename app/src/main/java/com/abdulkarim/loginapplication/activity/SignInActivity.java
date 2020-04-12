@@ -31,41 +31,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-                    String loginQ = "select * from " + DatabaseHelper.TABLE_USER + " where " +
-                            DatabaseHelper.USER_EMAIL + " = '" + edtEmail.getText().toString() +
-                            "' AND " + DatabaseHelper.USER_PASSWORD + " = '" + edtPassword.getText().toString()
-                            + "'";
-
-                    DatabaseManager.getInstance().openDatabase();
-
-                    Cursor cursor = DatabaseManager.getInstance().getUserWithEmail(loginQ);
-
-                    if (cursor != null && cursor.getCount() > 0) {
-
-                        User user = new User();
-
-                        cursor.moveToFirst();
-
-                        while (!cursor.isAfterLast()) {
-
-                            user.setUserId(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.USER_ID)));
-                            user.setEmail(cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_EMAIL)));
-                            user.setPassword(cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_PASSWORD)));
-
-                            cursor.moveToNext();
-                        }
-
-                        message("Login Success" + user.getUserId());
-                        //startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    } else {
-                        message("Login Failed");
-                    }
-                    DatabaseManager.getInstance().closeDatabase();
-
-                } catch (Exception e) {
-                    Toast.makeText(SignInActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
