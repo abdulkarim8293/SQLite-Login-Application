@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.abdulkarim.loginapplication.R;
 import com.abdulkarim.loginapplication.database.DatabaseHelper;
-import com.abdulkarim.loginapplication.database.DatabaseManager;
 import com.abdulkarim.loginapplication.model.User;
 
 public class SignInActivity extends AppCompatActivity {
