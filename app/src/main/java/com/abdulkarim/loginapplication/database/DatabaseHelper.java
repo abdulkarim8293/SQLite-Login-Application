@@ -2,6 +2,7 @@ package com.abdulkarim.loginapplication.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -52,6 +53,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(USER_PASSWORD, user.getPassword());
 
         db.insert(TABLE_USER, null, values);
+        db.close();
+    }
+
+    public boolean checkUser(String email) {
+
+        String[] columns = {USER_ID};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = USER_EMAIL + " = ?";
+
+        // selection argument
+        String[] selectionArgs = {email};
+
+        // query user table with condition
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id FROM user WHERE user_email = 'admin@gmail.com';
+         */
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkUser(String email, String password,Context context) {
+
+        // array of columns to fetch
+        String[] columns = {
+                USER_ID,USER_NAME,USER_EMAIL
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = USER_EMAIL + " = ?" + " AND " + USER_PASSWORD + " = ?";
+        // selection arguments
+        String[] selectionArgs = {email, password};
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            cursor.close();
+            db.close();
+            return true;
+        }
+        cursor.close();
+        db.close();
+        return false;
+    }
+
+    public void deleteUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // delete user record by id
+        db.delete(TABLE_USER, USER_ID + " = ?",
+                new String[]{String.valueOf(user.getUserId())});
         db.close();
     }
 }
